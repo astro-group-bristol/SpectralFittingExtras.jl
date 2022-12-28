@@ -1,0 +1,10 @@
+name = "KYNReverb"
+uuid = "cd802551-f261-4f1c-9355-f20acdba8541"
+authors = ["fjebaker <fergusbkr@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+LibXSPEC_KYNReverb_jll = "9d8a8cd6-ebce-5563-9f40-1010273145d0"
+LibXSPEC_jll = "50917eeb-3e3c-5f3a-99bd-93e1c30e1561"
+Parameters = "d96e819e-fc66-5662-9728-84c9c7592b0a"
+SpectralFitting = "f2c56810-742e-4b72-8bf4-27af3bb81a12"
