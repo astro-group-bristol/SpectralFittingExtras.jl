@@ -42,6 +42,8 @@ jobs:
           Pkg.add(url="https://github.com/GunnarFarneback/LocalRegistry.jl")
           using LocalRegistry
           Pkg.Registry.add(Pkg.RegistrySpec(url="https://github.com/astro-group-bristol/AstroRegistry/"))
+          # add packages to register
+          Pkg.add(path="KYNReverb")
           register("KYNReverb", registry="AstroRegistry", push=false)
           '
       - name: Create new branch
