@@ -43,8 +43,10 @@ jobs:
           using LocalRegistry
           Pkg.Registry.add(Pkg.RegistrySpec(url="https://github.com/astro-group-bristol/AstroRegistry/"))
           # add packages to register
-          Pkg.develop(path="KYNReverb")
-          register("KYNReverb", registry="AstroRegistry", push=false)
+          for package in ["KYNReverb", "Relline"]
+            Pkg.develop(path=package)
+            register(package, registry="AstroRegistry", push=false)
+          end
           '
       - name: Create new branch
         run: |

@@ -1,5 +1,6 @@
 module KYNReverb
 
+using LibXSPEC_jll
 using LibXSPEC_KYNReverb_jll
 
 using SpectralFitting
