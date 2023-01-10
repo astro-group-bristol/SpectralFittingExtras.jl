@@ -14,80 +14,80 @@ using SpectralFitting:
     FreeParameters
 
 @xspecmodel (:KYNrefrev, libXSPEC_kynrefrev) struct XS_KYNRefrev{T,F} <:
-                                                    AbstractSpectralModel{Additive}
+                                                    AbstractSpectralModel{T,Additive}
     "Normalisation."
-    K::FitParam{T}
+    K::T
     "Black hole spin."
-    a::FitParam{T}
+    a::T
     "Observer inclination angle (degrees)."
-    θₒ::FitParam{T}
+    θₒ::T
     "Inner disc radius."
-    r_inner::FitParam{T}
+    r_inner::T
     "Switch for inner edge: 0: integrate from inner edge. 1: If inner edge below marginally stable, integrate above marginally stable only. 2: Integrate from inner edge in units of marginally stable."
-    ms::FitParam{T}
+    ms::T
     "Outer disc radius."
-    r_outer::FitParam{T}
+    r_outer::T
     "Lower azimuth of non-zero disc emissivity (degrees)."
-    ϕ::FitParam{T}
-    dϕ::FitParam{T}
+    ϕ::T
+    dϕ::T
     "Black hole mass in units of 10⁸ solar masses."
-    M::FitParam{T}
+    M::T
     "Coronal source height."
-    h::FitParam{T}
+    h::T
     "Power law index of the primary flux."
-    Γ::FitParam{T}
+    Γ::T
     "Intrinsic (if negative) or observed (positive) primary isotropic flux in the X-ray energy range 2-10 keV in units of L/Ledd."
-    L::FitParam{T}
+    L::T
     "Ratio of primary to reflected flux. 0: Primary source hidden (only reflection). 1: Self-consistent model, with positive towards observer, negative towards the disc."
-    NpNr::FitParam{T}
+    NpNr::T
     "Density profile normalisation in 10^15 cm⁻³ if positive. Ionisation profile if negative."
-    density::FitParam{T}
+    density::T
     "Density profile in `abs(density) × r^density_profile`."
-    density_profile::FitParam{T}
+    density_profile::T
     "Fe abundance in solar units."
-    Fe_abundance::FitParam{T}
+    Fe_abundance::T
     "Fraction of thermalised flux from overal incident flux. 0: Only reverberation of reflection radiation. Negative: only thermal radiation. Positive: Both."
-    thermalised_flux::FitParam{T}
+    thermalised_flux::T
     "Accretion rate in units of Ledd (positive) or solar mass per Julian year (negative)."
-    accretion_rate::FitParam{T}
+    accretion_rate::T
     "Spectral hardenning factor."
-    f_column::FitParam{T}
+    f_column::T
     "Position of cloud centre in α impact parameter."
-    α_cloud::FitParam{T}
+    α_cloud::T
     "Position of cloud centre in β impact parameter."
-    β_cloud::FitParam{T}
+    β_cloud::T
     "Radius of the obscuring cloud."
-    r_cloud::FitParam{T}
+    r_cloud::T
     "Overall Doppler shift."
-    z::FitParam{T}
+    z::T
     "Limb darkening. 0: isotropic emission. 1: Laor. 2: Haardt."
-    limb::FitParam{T}
+    limb::T
     "Reflection table to use. 1: Reflion. 2. Reflionx."
-    table::FitParam{T}
+    table::T
     "Switch for how to compute reflection spectral. 1: Use computed ionisation parameter ξ, for interpolation in reflion use proper total incident intensity with shifted cut-offs. 2: Use ξ, correspondent to the computed normalisation of the incident flux (i.e. do no shift the cut-offs when computing total incident intensity)."
-    switch::FitParam{T}
+    switch::T
     "Which FITS table to use. Current ntable=80 is correct for this model."
-    n_table::FitParam{T}
+    n_table::T
     "Number of grid points in radius. If negative, then dependent on the height."
-    n_radius::FitParam{T}
+    n_radius::T
     "Divisions of radius. 0: equidistant, 1: expontential, >1: mixed with constant log step in inner regius and constant linear step in outer region."
-    r_division::FitParam{T}
+    r_division::T
     "Number of grid points to use in azimuth."
-    n_ϕ::FitParam{T}
+    n_ϕ::T
     "Length of the time bin (in gravitational units)."
-    dt::FitParam{T}
+    dt::T
     "Number of time subbins per one time bin"
-    nt::FitParam{T}
-    t1_f1_e1::FitParam{T}
-    t2_f2_e2::FitParam{T}
+    nt::T
+    t1_f1_e1::T
+    t2_f2_e2::T
     "Lower value of the energy refence band for lag or amplitude energy dependence."
-    Eref_lower::FitParam{T}
+    Eref_lower::T
     "Upper value of the energy refence band for lag or amplitude energy dependence."
-    Eref_upper::FitParam{T}
+    Eref_upper::T
     "Lag shift for lag-energy dependence."
-    dt_Af::FitParam{T}
+    dt_Af::T
     "Multiplicative factor for the amplitude-energy dependence."
-    k_qf::FitParam{T}
+    k_qf::T
     """
     - defines output in the XSPEC (photar array)
             - 0: spectrum for time interval defined by par32 and par33
@@ -168,94 +168,95 @@ using SpectralFitting:
                 band defined by par34 and par35 (rebinning here is done in lags 
                 directly)
     """
-    output_type::FitParam{T}
+    output_type::T
     "Number of threads."
-    n_threads::FitParam{T}
-    function XS_KYNRefrev(;
-        K = FitParam(1.0),
-        a = FitParam(1.0, lower_limit = 0.0, upper_limit = 1.0),
-        θₒ = FitParam(30.0, lower_limit = 0.0, upper_limit = 90.0),
-        r_inner = FitParam(1.0),
-        ms = FitParam(1.0),
-        r_outer = FitParam(1000.0),
-        ϕ = FitParam(0.0),
-        dϕ = FitParam(360.0),
-        M = FitParam(0.1, lower_limit = 1e-8, upper_limit = 1e3),
-        h = FitParam(3.0),
-        Γ = FitParam(2.0),
-        L = FitParam(0.001),
-        NpNr = FitParam(1.0),
-        density = FitParam(1.0),
-        density_profile = FitParam(0.0),
-        Fe_abundance = FitParam(1.0),
-        thermalised_flux = FitParam(0.0),
-        accretion_rate = FitParam(0.1),
-        f_column = FitParam(2.4),
-        α_cloud = FitParam(-6.0),
-        β_cloud = FitParam(0.0),
-        r_cloud = FitParam(0.0),
-        z = FitParam(0.0),
-        limb = FitParam(0.0),
-        table = FitParam(2.0),
-        switch = FitParam(1.0),
-        n_table = FitParam(80.0),
-        n_radius = FitParam(-4488.0),
-        r_division = FitParam(-1.0),
-        n_ϕ = FitParam(180.0),
-        dt = FitParam(1.0),
-        nt = FitParam(1.0),
-        t1_f1_e1 = FitParam(0.3),
-        t2_f2_e2 = FitParam(0.8),
-        Eref_lower = FitParam(1.0),
-        Eref_upper = FitParam(3.0),
-        dt_Af = FitParam(0.0),
-        k_qf = FitParam(1.0),
-        output_type = FitParam(16.0),
-        n_threads = FitParam(1.0),
+    n_threads::T
+end
+
+function XS_KYNRefrev(;
+    K = FitParam(1.0),
+    a = FitParam(1.0, lower_limit = 0.0, upper_limit = 1.0),
+    θₒ = FitParam(30.0, lower_limit = 0.0, upper_limit = 90.0),
+    r_inner = FitParam(1.0),
+    ms = FitParam(1.0),
+    r_outer = FitParam(1000.0),
+    ϕ = FitParam(0.0),
+    dϕ = FitParam(360.0),
+    M = FitParam(0.1, lower_limit = 1e-8, upper_limit = 1e3),
+    h = FitParam(3.0),
+    Γ = FitParam(2.0),
+    L = FitParam(0.001),
+    NpNr = FitParam(1.0),
+    density = FitParam(1.0),
+    density_profile = FitParam(0.0),
+    Fe_abundance = FitParam(1.0),
+    thermalised_flux = FitParam(0.0),
+    accretion_rate = FitParam(0.1),
+    f_column = FitParam(2.4),
+    α_cloud = FitParam(-6.0),
+    β_cloud = FitParam(0.0),
+    r_cloud = FitParam(0.0),
+    z = FitParam(0.0),
+    limb = FitParam(0.0),
+    table = FitParam(2.0),
+    switch = FitParam(1.0),
+    n_table = FitParam(80.0),
+    n_radius = FitParam(-4488.0),
+    r_division = FitParam(-1.0),
+    n_ϕ = FitParam(180.0),
+    dt = FitParam(1.0),
+    nt = FitParam(1.0),
+    t1_f1_e1 = FitParam(0.3),
+    t2_f2_e2 = FitParam(0.8),
+    Eref_lower = FitParam(1.0),
+    Eref_upper = FitParam(3.0),
+    dt_Af = FitParam(0.0),
+    k_qf = FitParam(1.0),
+    output_type = FitParam(16.0),
+    n_threads = FitParam(1.0),
+)
+    XS_KYNRefrev{typeof(K),FreeParameters{(:K, :a, :θₒ)}}(
+        K,
+        a,
+        θₒ,
+        r_inner,
+        ms,
+        r_outer,
+        ϕ,
+        dϕ,
+        M,
+        h,
+        Γ,
+        L,
+        NpNr,
+        density,
+        density_profile,
+        Fe_abundance,
+        thermalised_flux,
+        accretion_rate,
+        f_column,
+        α_cloud,
+        β_cloud,
+        r_cloud,
+        z,
+        limb,
+        table,
+        switch,
+        n_table,
+        n_radius,
+        r_division,
+        n_ϕ,
+        dt,
+        nt,
+        t1_f1_e1,
+        t2_f2_e2,
+        Eref_lower,
+        Eref_upper,
+        dt_Af,
+        k_qf,
+        output_type,
+        n_threads,
     )
-        new{parameter_type(K),FreeParameters{(:K, :a, :θₒ)}}(
-            K,
-            a,
-            θₒ,
-            r_inner,
-            ms,
-            r_outer,
-            ϕ,
-            dϕ,
-            M,
-            h,
-            Γ,
-            L,
-            NpNr,
-            density,
-            density_profile,
-            Fe_abundance,
-            thermalised_flux,
-            accretion_rate,
-            f_column,
-            α_cloud,
-            β_cloud,
-            r_cloud,
-            z,
-            limb,
-            table,
-            switch,
-            n_table,
-            n_radius,
-            r_division,
-            n_ϕ,
-            dt,
-            nt,
-            t1_f1_e1,
-            t2_f2_e2,
-            Eref_lower,
-            Eref_upper,
-            dt_Af,
-            k_qf,
-            output_type,
-            n_threads,
-        )
-    end
 end
 
 function __init__()
