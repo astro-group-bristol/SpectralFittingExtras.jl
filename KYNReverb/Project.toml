@@ -1,7 +1,7 @@
 name = "KYNReverb"
 uuid = "cd802551-f261-4f1c-9355-f20acdba8541"
 authors = ["fjebaker <fergusbkr@gmail.com>"]
-version = "0.2.0"
+version = "0.2.1"
 
 [deps]
 LibXSPEC_KYNReverb_jll = "9d8a8cd6-ebce-5563-9f40-1010273145d0"
