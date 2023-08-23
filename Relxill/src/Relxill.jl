@@ -1,4 +1,4 @@
-module Relline
+module Relxill
 
 using LibXSPEC_jll
 using LibXSPEC_Relxill_jll
@@ -67,4 +67,4 @@ end
 
 export XS_Relline
 
-end # module Relline
+end # module Relxill
