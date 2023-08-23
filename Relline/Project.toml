@@ -1,7 +1,7 @@
 name = "Relline"
 uuid = "bed4937e-0794-4811-9838-4ee3843e38e8"
 authors = ["fjebaker <fergusbkr@gmail.com>"]
-version = "0.2.1"
+version = "0.2.2"
 
 [deps]
 LibXSPEC_Relline_jll = "e31488d4-824c-5b79-8647-ca95fa605810"
