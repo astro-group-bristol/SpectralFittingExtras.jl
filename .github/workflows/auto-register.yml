@@ -17,10 +17,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        julia-version: ['1.8']
+        julia-version: ['1.9']
         os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: julia-actions/setup-julia@v1
         with:
           version: ${{ matrix.julia-version }}
@@ -43,7 +43,7 @@ jobs:
           using LocalRegistry
           Pkg.Registry.add(Pkg.RegistrySpec(url="https://github.com/astro-group-bristol/AstroRegistry/"))
           # add packages to register
-          for package in ["KYNReverb", "Relline"]
+          for package in ["KYNReverb", "Relline", "Relxill"]
             Pkg.develop(path=package)
             register(package, registry="AstroRegistry", push=false)
           end
