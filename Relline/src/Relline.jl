@@ -1,6 +1,5 @@
 module Relline
 
-
 using LibXSPEC_jll
 using LibXSPEC_Relline_jll
 
@@ -90,5 +89,11 @@ end
 SpectralFitting.implementation(::Type{<:XS_Relline}) = SpectralFitting.XSPECImplementation()
 
 export XS_Relline
+
+function __init__()
+    @warn (
+        "This model is outdated (relline v0.4a), and has numerical problems at shallow and steep observer inclination. To use the most up-to-date `relline` model, please install `Relxill` with `relline` v0.5a. This can be done via the Julia package manager."
+    )
+end
 
 end # module Relline
