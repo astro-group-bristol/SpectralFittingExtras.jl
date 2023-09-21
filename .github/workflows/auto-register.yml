@@ -43,7 +43,7 @@ jobs:
           using LocalRegistry
           Pkg.Registry.add(Pkg.RegistrySpec(url="https://github.com/astro-group-bristol/AstroRegistry/"))
           # add packages to register
-          for package in ["KYNReverb", "Relline", "Relxill"]
+          for package in ["KYNReverb", "Relline", "Relxill", "Warmabs"]
             Pkg.develop(path=package)
             register(package, registry="AstroRegistry", push=false)
           end

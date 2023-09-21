@@ -1,0 +1,11 @@
+name = "Warmabs"
+uuid = "1293a30c-8ee5-487f-8299-33928d5cda09"
+authors = ["fjebaker <fergusbkr@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+LibXSPEC_Warmabs_jll = "cad11c8d-934b-5dad-a678-9ee9e5e00166"
+SpectralFitting = "f2c56810-742e-4b72-8bf4-27af3bb81a12"
+
+[compat]
+SpectralFitting = ">=0.4.4"
