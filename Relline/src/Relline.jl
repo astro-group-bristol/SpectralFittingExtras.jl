@@ -2,12 +2,13 @@ module Relline
 
 using LibXSPEC_jll
 using LibXSPEC_Relline_jll
+using LibXSPEC_Relline_jll: libXSPEC_relline
 
 using SpectralFitting
 using SpectralFitting:
-    AbstractSpectralModel, Additive, FitParam, parameter_type, FreeParameters
+    AbstractSpectralModel, Additive, FitParam, FreeParameters
 
-struct XS_Relline{T,F} <: AbstractSpectralModel{T,Additive}
+@xspecmodel type = Float32 struct XS_Relline{T,F} <: AbstractSpectralModel{T,Additive}
     K::T
     lineE::T
     index1::T
@@ -20,6 +21,7 @@ struct XS_Relline{T,F} <: AbstractSpectralModel{T,Additive}
     z::T
     limb::T
 end
+
 function XS_Relline(;
     K = FitParam(1.0),
     lineE = FitParam(6.4),
@@ -48,45 +50,24 @@ function XS_Relline(;
     )
 end
 
-@inline function SpectralFitting.invoke!(flux, energy, model::XS_Relline)
-    params = [
-        model.lineE,
-        model.index1,
-        model.index2,
-        model.r_break,
-        model.a,
-        model.θ_obs,
-        model.inner_r,
-        model.outer_r,
-        model.z,
-        model.limb,
-    ]
-    _relline!(flux, energy, params)
-end
-
-# needs 32 bit floats ...
-@inline function _relline!(flux::Vector{Float32}, energy::Vector{Float32}, params::Vector{Float32})
+function SpectralFitting._unsafe_ffi_invoke!(
+    output::Vector{Float32},
+    error_vec,
+    input::Vector{Float32},
+    params::Vector{Float32},
+    ::Type{<:XS_Relline},
+)
     ccall(
         (:tdrelline_, libXSPEC_relline),
         Cvoid,
         (Ptr{Float32}, Ref{Int32}, Ptr{Float32}, Ref{Int32}, Ptr{Float32}),
-        energy,
-        length(energy) - 1,
+        input,
+        length(input) - 1,
         params,
         2,
-        flux,
+        output,
     )
 end
-
-@inline function _relline!(flux, energy, params)
-    f32_flux = Float32.(flux)
-    f32_energy = Float32.(energy)
-    f32_params = Float32.(params)
-    _relline!(f32_flux, f32_energy, f32_params)
-    @. flux = f32_flux
-end
-
-SpectralFitting.implementation(::Type{<:XS_Relline}) = SpectralFitting.XSPECImplementation()
 
 export XS_Relline
 
