@@ -13,7 +13,8 @@ using SpectralFitting:
     parameter_type,
     FreeParameters
 
-@xspecmodel (:lmodrelline, libXSPEC_relxill) struct XS_Relline{T,F} <: AbstractSpectralModel{T,Additive}
+@xspecmodel (:lmodrelline, libXSPEC_relxill) struct XS_Relline{T,F} <:
+                                                    AbstractSpectralModel{T,Additive}
     "Normalisation."
     K::T
     "Rest frame emission energy."
