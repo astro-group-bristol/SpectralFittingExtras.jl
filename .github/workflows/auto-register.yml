@@ -45,7 +45,11 @@ jobs:
           # add packages to register
           for package in ["KYNReverb", "Relline", "Relxill", "Warmabs"]
             Pkg.develop(path=package)
-            register(package, registry="AstroRegistry", push=false)
+            try 
+              register(package, registry="AstroRegistry", push=false)
+            catch err
+              println(err)
+            end
           end
           '
       - name: Create new branch
