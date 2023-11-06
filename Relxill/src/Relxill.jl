@@ -106,6 +106,8 @@ function XS_Relxill(;
     XS_Relxill(K, index1, index2, r_break, a, θ_obs, inner_r, outer_r, z, Gamma, logxi, Afe, Ecut, refl_frac)
 end
 
+register_model_data(XS_Relxill, "xillver/xillver-a-Ec5.fits")
+
 export XS_Relline, XS_Relxill
 
 end # module Relxill
