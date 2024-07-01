@@ -1,7 +1,7 @@
 name = "Reflionx"
 uuid = "cc3c03b4-7baa-4ee6-8208-c857e975bd70"
 authors = ["fjebaker <fergusbkr@gmail.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 SpectralFitting = "f2c56810-742e-4b72-8bf4-27af3bb81a12"
