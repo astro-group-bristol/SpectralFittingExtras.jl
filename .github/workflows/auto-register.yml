@@ -35,15 +35,15 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
       - run: |
-          git config --global user.email "bot@astro-group-bristol"
-          git config --global user.name "astro-group-bristol[bot]"
+          git config --global user.email "isamborg@cosroe.com"
+          git config --global user.name "Isamborg"
           julia -e '
           import Pkg
           Pkg.add(url="https://github.com/GunnarFarneback/LocalRegistry.jl")
           using LocalRegistry
           Pkg.Registry.add(Pkg.RegistrySpec(url="https://github.com/astro-group-bristol/AstroRegistry/"))
           # add packages to register
-          for package in ["KYNReverb", "Relline", "Relxill", "Warmabs"]
+          for package in ["KYNReverb", "Relline", "Relxill", "Warmabs", "Reflionx"]
             Pkg.develop(path=package)
             try 
               register(package, registry="AstroRegistry", push=false)
