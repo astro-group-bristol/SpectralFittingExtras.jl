@@ -14,12 +14,12 @@ function SpectralFitting.MultiLinearInterpolations.restructure(
     @views begin
         start = 1
         stop = start + length(spec.energy) - 1
-        # TODO: energy grid probably always the same?
+        energy = vs[start:stop]
         start = stop + 1
 
         stop = start + length(spec.flux) - 1
-        flux = vs[start:stop]
-        ReflectionSpectrum(spec.energy[1:end], flux[1:end-1])
+        flux = vs[start:stop - 1]
+        ReflectionSpectrum(energy, flux)
     end
 end
 
@@ -68,6 +68,7 @@ function SpectralFitting.invoke!(output, domain, model::ReflionxTable)
         (model.Γ, model.logξ, model.E_cut),
     )
     SpectralFitting.rebin_if_different_domains!(output, domain, spec.energy, spec.flux)
+    @views output .= output ./ (domain[2:end] .- domain[1:end-1])
 end
 
 function Base.copy(m::ReflionxTable)
