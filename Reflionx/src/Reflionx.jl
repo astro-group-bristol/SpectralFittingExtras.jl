@@ -75,7 +75,7 @@ function Base.copy(m::ReflionxTable)
     interp = SpectralFitting.MultilinearInterpolator{3}(m.table.data.grids)
     typeof(m)(
         (; interp = interp, data = m.table.data),
-        (copy(getproperty(m, f)) for f in fieldnames(typeof(f))[2:end])...,
+        (copy(getproperty(m, f)) for f in fieldnames(typeof(m))[2:end])...,
     )
 end
 
