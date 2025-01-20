@@ -6,6 +6,7 @@ using LibXSPEC_Relxill_jll
 using SpectralFitting
 using SpectralFitting: AbstractSpectralModel, Additive, FitParam
 
+using XSPECModels
 using XSPECModels: @xspecmodel, @wrap_xspec_model_ccall
 
 @xspecmodel (:lmodrelline, libXSPEC_relxill) struct XS_Relline{T} <:
