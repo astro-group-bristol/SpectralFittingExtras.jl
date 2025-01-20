@@ -1,7 +1,7 @@
 name = "Relxill"
 uuid = "b6389841-9bc2-481d-a2e0-8b38b8d5f21d"
 authors = ["fjebaker <fergusbkr@gmail.com>"]
-version = "0.2.0"
+version = "0.2.1"
 
 [deps]
 LibXSPEC_Relxill_jll = "e5636fd8-dfb6-572c-a65b-f91a4431b0da"
