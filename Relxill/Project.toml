@@ -7,6 +7,8 @@ version = "0.1.1"
 LibXSPEC_Relxill_jll = "e5636fd8-dfb6-572c-a65b-f91a4431b0da"
 LibXSPEC_jll = "50917eeb-3e3c-5f3a-99bd-93e1c30e1561"
 SpectralFitting = "f2c56810-742e-4b72-8bf4-27af3bb81a12"
+XSPECModels = "e051c099-9e89-4e1f-aad2-39a4611ecf4d"
 
 [compat]
-SpectralFitting = ">=0.3"
+SpectralFitting = ">=0.6"
+XSPECModels = "0.1.1"
