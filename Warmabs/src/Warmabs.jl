@@ -110,7 +110,7 @@ function XS_WarmAbsorber(;
         Redshift,
     )
 end
-function SpectralFitting._unsafe_ffi_invoke!(
+function XSPECModels._unsafe_ffi_invoke!(
     output::Vector{Float32},
     error_vec::Vector{Float32},
     input::Vector{Float32},
