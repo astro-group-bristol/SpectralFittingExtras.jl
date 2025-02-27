@@ -4,8 +4,10 @@ using LibXSPEC_Warmabs_jll
 using LibXSPEC_Warmabs_jll: libXSPEC_fphotems
 
 using SpectralFitting
-using SpectralFitting:
-    AbstractSpectralModel, Multiplicative, FitParam, FreeParameters
+using SpectralFitting: AbstractSpectralModel, Additive, FitParam
+
+using XSPECModels
+using XSPECModels: @xspecmodel, @wrap_xspec_model_ccall
 
 @xspecmodel type = Float32 struct XS_WarmAbsorber{T,F} <:
                                   AbstractSpectralModel{T,Multiplicative}
@@ -108,7 +110,7 @@ function XS_WarmAbsorber(;
         Redshift,
     )
 end
-function SpectralFitting._unsafe_ffi_invoke!(
+function XSPECModels._unsafe_ffi_invoke!(
     output::Vector{Float32},
     error_vec::Vector{Float32},
     input::Vector{Float32},
