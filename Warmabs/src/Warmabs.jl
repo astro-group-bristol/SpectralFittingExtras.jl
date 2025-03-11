@@ -9,7 +9,7 @@ using SpectralFitting: AbstractSpectralModel, Additive, FitParam
 using XSPECModels
 using XSPECModels: @xspecmodel, @wrap_xspec_model_ccall
 
-@xspecmodel type = Float32 struct XS_WarmAbsorber{T,F} <:
+@xspecmodel type = Float32 struct XS_WarmAbsorber{T} <:
                                   AbstractSpectralModel{T,Multiplicative}
     column::T
     rlogxi::T
@@ -76,7 +76,7 @@ function XS_WarmAbsorber(;
     vturb = FitParam(0.0; lower_limit = 0.0, upper_limit = 10000.0),
     Redshift = FitParam(0.0; lower_limit = 0.0, upper_limit = 10.0),
 )
-    XS_WarmAbsorber{typeof(column),SpectralFitting.FreeParameters{()}}(
+    XS_WarmAbsorber{typeof(column)}(
         column,
         rlogxi,
         Cabund,
