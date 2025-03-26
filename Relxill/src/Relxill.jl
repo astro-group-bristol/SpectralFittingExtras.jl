@@ -4,7 +4,7 @@ using LibXSPEC_jll
 using LibXSPEC_Relxill_jll
 
 using SpectralFitting
-using SpectralFitting: AbstractSpectralModel, Additive, FitParam
+using SpectralFitting: AbstractSpectralModel, Additive, FitParam, Convolutional
 
 using XSPECModels
 using XSPECModels: @xspecmodel, @wrap_xspec_model_ccall
@@ -121,6 +121,52 @@ end
 
 SpectralFitting.register_model_data(XS_Relxill, "xillver/xillver-a-Ec5.fits.gz")
 
-export XS_Relline, XS_Relxill
+@xspecmodel (:lmodrelconv, libXSPEC_relxill) struct XS_Relconv{T} <:
+                                                    AbstractSpectralModel{T,Convolutional}
+    "Emissivity index 1."
+    index1::T
+    "Emissivity index 2."
+    index2::T
+    "Break radius between the emissivity indices."
+    r_break::T
+    "Black hole spin."
+    a::T
+    "Observer inclination."
+    θ_obs::T
+    "Inner disc radius (set to -1 for ISCO)."
+    inner_r::T
+    "Outer disc radius."
+    outer_r::T
+    "Limb-darkening/-brightening law."
+    limb::T
+
+end
+function XS_Relconv(;
+    index1 = FitParam(3.0, frozen = true),
+    index2 = FitParam(3.0, frozen = true),
+    r_break = FitParam(15.0, frozen = true),
+    a = FitParam(0.998, upper_limit = 0.998, frozen = true),
+    # theta_obs upper limit of 87 wasn't strictly obeyed resulting in
+    # *** relxill error : incl 87.001  is not in the required range between 3-87 deg
+    # this can also happen for the lower limit
+    # *** relxill error : incl 3.000  is not in the required range between 3-87 deg
+    θ_obs = FitParam(30.0, lower_limit = 4.0, upper_limit = 86.0),
+    inner_r = FitParam(-1.0, frozen = true),
+    outer_r = FitParam(400.0, frozen = true),
+    limb = FitParam(0.0, frozen = true),
+)
+    XS_Relconv(
+        index1,
+        index2,
+        r_break,
+        a,
+        θ_obs,
+        inner_r,
+        outer_r,
+        limb,
+    )
+end
+
+export XS_Relline, XS_Relxill, XS_Relconv
 
 end # module Relxill
