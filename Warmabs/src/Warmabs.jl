@@ -156,7 +156,9 @@ for model in (XS_WarmAbsorber,)
 end
 
 function __init__()
-    mkdir(WARMABS_PATH)
+    if !isdir(WARMABS_PATH)
+        mkdir(WARMABS_PATH)
+    end
 end
 
 export XS_WarmAbsorber
