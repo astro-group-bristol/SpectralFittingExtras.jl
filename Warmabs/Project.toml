@@ -1,7 +1,7 @@
 name = "Warmabs"
 uuid = "1293a30c-8ee5-487f-8299-33928d5cda09"
 authors = ["fjebaker <fergusbkr@gmail.com>"]
-version = "0.1.2"
+version = "0.1.3"
 
 [deps]
 LibXSPEC_Warmabs_jll = "cad11c8d-934b-5dad-a678-9ee9e5e00166"
@@ -12,3 +12,4 @@ XSPECModels = "e051c099-9e89-4e1f-aad2-39a4611ecf4d"
 [compat]
 SpectralFitting = ">=0.6"
 XSPECModels = "0.1.1"
+LibXSPEC_Warmabs_jll = "2.58"
