@@ -142,15 +142,21 @@ const MODEL_FILES = (
     "xo01_detal4.fits",
 )
 
+const WARMABS_PATH = expanduser("~/.julia/spectral_fitting_data/warmabs")
+
 # register all model data
 for model in (XS_WarmAbsorber,)
     SpectralFitting.register_model_data(
         model,
         (
-            ("warmabs/$i", joinpath(LibXSPEC_Warmabs_jll.artifact_dir, "data", i)) for
+             ("warmabs/$i", joinpath(WARMABS_PATH, i)) for
             i in MODEL_FILES
         )...,
     )
+end
+
+function __init__()
+    mkdir(WARMABS_PATH)
 end
 
 export XS_WarmAbsorber
