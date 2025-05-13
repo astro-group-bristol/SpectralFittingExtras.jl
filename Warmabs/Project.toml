@@ -11,5 +11,5 @@ XSPECModels = "e051c099-9e89-4e1f-aad2-39a4611ecf4d"
 
 [compat]
 SpectralFitting = ">=0.6"
-XSPECModels = "0.1.1"
+XSPECModels = ">=0.1.1"
 LibXSPEC_Warmabs_jll = "2.58"
