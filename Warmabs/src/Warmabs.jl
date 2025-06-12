@@ -44,37 +44,37 @@ using XSPECModels: @xspecmodel, @wrap_xspec_model_ccall
     redshift::T
 end
 function XS_WarmAbsorber(;
-    column = FitParam(0.0; lower_limit = -3.0, upper_limit = 2.0),
-    rlogxi = FitParam(0.0; lower_limit = -4.0, upper_limit = 5.0),
-    Cabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Nabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Oabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Fabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Neabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Naabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Mgabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Alabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Siabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Pabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Sabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Clabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Arabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Kabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Caabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Scabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Tiabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Vabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Crabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Mnabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Feabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Coabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Niabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Cuabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    Znabund = FitParam(1.0; lower_limit = 0.0, upper_limit = 1000.0),
-    write_outfile = FitParam(0.0; lower_limit = 0.0, upper_limit = 1.0),
-    outfile_idx = FitParam(0.0; lower_limit = 0.0, upper_limit = 10000.0),
-    vturb = FitParam(0.0; lower_limit = 0.0, upper_limit = 10000.0),
-    Redshift = FitParam(0.0; lower_limit = 0.0, upper_limit = 10.0),
+    column=FitParam(0.0; lower_limit=-3.0, upper_limit=2.0),
+    rlogxi=FitParam(0.0; lower_limit=-4.0, upper_limit=5.0),
+    Cabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Nabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Oabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Fabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Neabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Naabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Mgabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Alabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Siabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Pabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Sabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Clabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Arabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Kabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Caabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Scabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Tiabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Vabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Crabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Mnabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Feabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Coabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Niabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Cuabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    Znabund=FitParam(1.0; lower_limit=0.0, upper_limit=1000.0),
+    write_outfile=FitParam(0.0; lower_limit=0.0, upper_limit=1.0),
+    outfile_idx=FitParam(0.0; lower_limit=0.0, upper_limit=10000.0),
+    vturb=FitParam(0.0; lower_limit=0.0, upper_limit=10000.0),
+    Redshift=FitParam(0.0; lower_limit=0.0, upper_limit=10.0),
 )
     XS_WarmAbsorber{typeof(column)}(
         column,
@@ -144,20 +144,19 @@ const MODEL_FILES = (
 
 const WARMABS_PATH = expanduser("~/.julia/spectral_fitting_data/warmabs")
 
-# register all model data
-for model in (XS_WarmAbsorber,)
-    SpectralFitting.register_model_data(
-        model,
-        (
-             ("warmabs/$i", joinpath(WARMABS_PATH, i)) for
-            i in MODEL_FILES
-        )...,
-    )
-end
-
 function __init__()
     if !isdir(WARMABS_PATH)
         mkdir(WARMABS_PATH)
+    end
+    # register all model data
+    for model in (XS_WarmAbsorber,)
+        SpectralFitting.register_model_data(
+            model,
+            (
+                ("warmabs/$i", joinpath(WARMABS_PATH, i)) for
+                i in MODEL_FILES
+            )...,
+        )
     end
 end
 
