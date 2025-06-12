@@ -132,6 +132,7 @@ end
 
 const MODEL_FILES = (
     "atdbwarmabs.fits",
+    "coheatwarmabs.dat",
     "xo01_detah2.fits",
     "xo01_detah3.fits",
     "xo01_detah4.fits",
