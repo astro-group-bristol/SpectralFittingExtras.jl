@@ -119,7 +119,9 @@ function XS_Relxill(;
     )
 end
 
-SpectralFitting.register_model_data(XS_Relxill, "xillver/xillver-a-Ec5.fits.gz")
+function __init__()
+    SpectralFitting.register_model_data(XS_Relxill, "xillver/xillver-a-Ec5.fits.gz")
+end
 
 @xspecmodel (:lmodrelconv, libXSPEC_relxill) struct XS_Relconv{T} <:
                                                     AbstractSpectralModel{T,Convolutional}
