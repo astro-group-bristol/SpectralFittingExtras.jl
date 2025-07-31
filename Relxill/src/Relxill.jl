@@ -119,8 +119,6 @@ function XS_Relxill(;
     )
 end
 
-SpectralFitting.register_model_data(XS_Relxill, "xillver/xillver-a-Ec5.fits.gz")
-
 @xspecmodel (:lmodrelconv, libXSPEC_relxill) struct XS_Relconv{T} <:
                                                     AbstractSpectralModel{T,Convolutional}
     "Emissivity index 1."
@@ -165,6 +163,10 @@ function XS_Relconv(;
         outer_r,
         limb,
     )
+end
+
+function __init__()
+    SpectralFitting.register_model_data(XS_Relxill, "xillver/xillver-a-Ec5.fits.gz")
 end
 
 export XS_Relline, XS_Relxill, XS_Relconv
